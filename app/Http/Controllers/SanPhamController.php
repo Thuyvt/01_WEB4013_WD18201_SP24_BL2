@@ -23,8 +23,18 @@ class SanPhamController extends Controller
     public function detail($id) {
         $title = 'Id sản phẩm = ' . $id;
         $query = DB::table('san-pham')
-            ->where('id','=', $id);
-
+            ->avg('price') // lay trung binh cong
+            ->sum('price')
+            ->min('price')
+            ->max('price')
+            ->count()// dem so luogn ban ghi
+            -> find($id) // find by id
+            ->where('id','=', $id)
+            ->orWhere('name', 'like', '%thuy')
+            ->whereBetween('id', [1, 10])
+            ->whereNotNull('name')
+            ->orderBy('price', 'asc')
+        ;
         $detail = $query->get();
         return view('sanpham.detail', compact('title', 'detail'));
     }
