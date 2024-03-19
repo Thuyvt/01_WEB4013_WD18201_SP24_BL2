@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SanPhamController;
+use App\Http\Controllers\CustomerController;
 
 /*
 |--------------------------------------------------------------------------
@@ -24,3 +25,10 @@ Route::get('/san-pham', [SanPhamController::class,'index']);
 // Validate route
 Route::get('/san-pham/{id}', [SanPhamController::class, 'detail'])->where('id', '[0-9]+');
 Route::get('/san-pham/xoa/{id}', [SanPhamController::class, 'delete']);
+
+Route::get('/day04', function () {
+    return view('Day04');
+});
+
+// Khai báo route đủ phương thức cho 1 đối tượng
+Route::resource('/customers', CustomerController::class);
