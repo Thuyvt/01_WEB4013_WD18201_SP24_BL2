@@ -50,7 +50,9 @@ class CustomerController extends Controller
      */
     public function show($id)
     {
-        //
+        $customer = Customer::find($id); // SELECT * from customer where id = $id
+//        dd($customer);
+        return view('customer.detail', compact('customer'));
     }
 
     /**
@@ -85,5 +87,9 @@ class CustomerController extends Controller
     public function destroy($id)
     {
         //
+//        dd('Gọi hàm xóa');
+        $customer = Customer::find($id);
+        $customer -> delete();
+        return redirect('/customers');
     }
 }

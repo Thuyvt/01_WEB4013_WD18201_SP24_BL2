@@ -32,8 +32,14 @@
                     </td>
                     <td>
                         <button>Sửa</button>
-                        <button>Chi tiết</button>
-                        <button>Xóa</button>
+                        <button><a href="/customers/{{$item->id}}">Chi tiết</a></button>
+                        <form action="/customers/{{$item->id}}" method="POST">
+                            @csrf
+                            @method("DELETE")
+                            <button type="submit">
+                                Xóa
+                            </button>
+                        </form>
                     </td>
                 </tr>
             @endforeach
