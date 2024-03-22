@@ -26,6 +26,7 @@ class CustomerSeeder extends Seeder
                     'phone' => Str::random(9),
                     'address' => Str::random(20),
                     'status' => random_int(0,1),
+                    'img' => '',
                     'created_at' => now(),
                 ]
             );

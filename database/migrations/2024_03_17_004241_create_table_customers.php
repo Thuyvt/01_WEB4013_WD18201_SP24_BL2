@@ -22,6 +22,7 @@ return new class extends Migration
             $table->string('phone');
             $table->string('address');
             $table->integer('status');
+            $table->string('img');
             $table->timestamps();
         });
     }

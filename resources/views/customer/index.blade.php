@@ -9,6 +9,7 @@
 </head>
 <body>
     <h1>Danh sách khách hàng</h1>
+    <button><a href="/customers/create">Tạo mới</a></button>
     <table>
         <thead>
             <tr>
@@ -31,7 +32,9 @@
                         @endif
                     </td>
                     <td>
-                        <button>Sửa</button>
+                        <button>
+                            <a href="/customers/{{$item->id}}/edit">Sửa</a>
+                        </button>
                         <button><a href="/customers/{{$item->id}}">Chi tiết</a></button>
                         <form action="/customers/{{$item->id}}" method="POST">
                             @csrf

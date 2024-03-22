@@ -28,7 +28,7 @@ class CustomerController extends Controller
      */
     public function create()
     {
-        //
+        return view('customer.create');
     }
 
     /**
@@ -39,7 +39,34 @@ class CustomerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+//        dd($request);
+        // Cách 1
+        $customer = new Customer();
+        $customer -> name = $request->input('name');
+        $customer -> identify_id =$request->input('identify_id');
+        $customer -> gender = $request->input('gender');
+        $customer -> date_of_birth = $request->input('date_of_birth');
+        $customer -> phone = $request->input('phone');
+        $customer -> address = $request->input('address');
+        $customer -> status = $request->input('status');
+
+        // xuwr lý fie ảnh
+        if ($request->hasFile('img')) {
+            $image = $request->file('img');
+            $fileName = $image->getClientOriginalName();
+            $path = $request->file('img')->storeAs('public/', $fileName);
+
+            // lưu tên file vào đối tượng
+//            $customer -> img = $fileName;
+
+            $customer = Customer::create([
+               'name' => $request->input('name'),
+                'identify_id' => $request->input('identify_id'),
+            ]);
+        }
+        $customer->save();
+
+        return redirect('/customers');
     }
 
     /**
@@ -64,6 +91,8 @@ class CustomerController extends Controller
     public function edit($id)
     {
         //
+        $customer = Customer::find($id);
+        return view('customer.update', compact('customer'));
     }
 
     /**
@@ -75,7 +104,21 @@ class CustomerController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        // Xử lý ảnh lấy ra fileName giống hàm createe
+        $customer = Customer::where('id', $id);
+        $customer -> update([
+                [
+                    'name' => $request->input('name'),
+                    'identify_id' => $request->input('identify_id'),
+                    'gender' => $request->input('gender'),
+                    'date_of_birth' => $request->input('date_of_birth'),
+                    'phone' => $request->input('phone'),
+                    'address' => $request->input('address'),
+                    'status' =>$request->input('status'),
+                    'img' => ''
+                ]
+            ]);
+            return redirect('/customers');
     }
 
     /**
