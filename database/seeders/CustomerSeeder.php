@@ -27,6 +27,7 @@ class CustomerSeeder extends Seeder
                     'address' => Str::random(20),
                     'status' => random_int(0,1),
                     'img' => '',
+                    'role_id' => random_int(1,5),
                     'created_at' => now(),
                 ]
             );

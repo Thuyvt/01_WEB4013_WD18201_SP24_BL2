@@ -17,6 +17,9 @@
             <div class="mt-3">
                 <span class="form-label">Họ và tên:</span>
                 <input type="text" name="name" class="form-control">
+                @error('name')
+                    <p class="text-danger">{{$message}}</p>
+                @enderror
             </div>
             <div class="mt-3">
                 <span class="form-label">Số chứng minh thư:</span>
@@ -49,6 +52,17 @@
             <div class="mt-3">
                 <span class="form-label">Ảnh đại diện:</span>
                 <input type="file" name="img" class="form-control">
+            </div>
+            <div class="mt-3">
+                <span class="form-label">Vai trò:</span>
+                <select name="role_id" id="" class="form-control">
+                    @foreach($roles as $r)
+                        <option value="{{$r->id}}">
+                            {{$r->name}}
+                        </option>
+                    @endforeach
+
+                </select>
             </div>
             <button type="submit" class="btn btn-success mt-3"> Tạo mới </button>
         </form>

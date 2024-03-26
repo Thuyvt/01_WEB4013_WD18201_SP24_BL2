@@ -10,5 +10,6 @@
 <body>
     <h3>Thông tin chi tiết khách hàng</h3>
     <p>Họ và tên: {{$customer->name}}</p>
+    <p>Vai trò khách hàng: {{$customer->role->name}}</p>
 </body>
 </html>

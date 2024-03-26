@@ -52,6 +52,23 @@
             <span class="form-label">Ảnh đại diện:</span>
             <input type="file" name="img" class="form-control">
         </div>
+        <div class="mt-3">
+            <span class="form-label">Vai trò:</span>
+            <select name="role_id" id="" class="form-control">
+                @foreach($roles as $r)
+                    @if($r->id == $customer->role_id)
+                        <option value="{{$r->id}}" selected>
+                            {{$r->name}}
+                        </option>
+                    @else
+                        <option value="{{$r->id}}">
+                            {{$r->name}}
+                        </option>
+                    @endif
+                @endforeach
+
+            </select>
+        </div>
         <button type="submit" class="btn btn-success mt-3"> Cập nhật </button>
     </form>
 </div>

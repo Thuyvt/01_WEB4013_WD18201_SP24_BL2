@@ -23,6 +23,12 @@ return new class extends Migration
             $table->string('address');
             $table->integer('status');
             $table->string('img');
+            // Foreign keys
+            $table->unsignedInteger('role_id');
+            $table->foreign('role_id')
+                -> references('id')
+                -> on ('roles');
+
             $table->timestamps();
         });
     }
