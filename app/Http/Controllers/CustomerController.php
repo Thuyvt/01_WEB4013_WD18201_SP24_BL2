@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Customer;
 use App\Models\Role;
+use App\Http\Requests\RuleCustomer;
 
 use Illuminate\Support\Facades\Storage;
 class CustomerController extends Controller
@@ -40,15 +41,15 @@ class CustomerController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(RuleCustomer $request)
     {
 //        dd($request);
         // Validate form
-        $request->validate([
-            'name' => ['required', 'min:2', 'max:25'],// rule dạng mảng bat buộc thỏa mãn hết
-            'identify_id' => 'required|digits_between:9,10',// rule dạng bail gặp phải lỗi dừng lại ngay
-            'date_of_birth' => ['required', 'date']
-        ]);
+//        $request->validate([
+//            'name' => ['required', 'min:2', 'max:25'],// rule dạng mảng bat buộc thỏa mãn hết
+//            'identify_id' => 'required|digits_between:9,10',// rule dạng bail gặp phải lỗi dừng lại ngay
+//            'date_of_birth' => ['required', 'date']
+//        ]);
         // Gặp gỗi sẽ dừng xử lý
         // Cách 1
         $customer = new Customer();
@@ -114,7 +115,7 @@ class CustomerController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(RuleCustomer $request, $id)
     {
         // Xử lý ảnh lấy ra fileName giống hàm createe
         $customer = Customer::where('id', $id);

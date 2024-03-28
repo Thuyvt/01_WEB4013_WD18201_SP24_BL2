@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SanPhamController;
 use App\Http\Controllers\CustomerController;
+use \App\Http\Controllers\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,9 +27,19 @@ Route::get('/san-pham', [SanPhamController::class,'index']);
 Route::get('/san-pham/{id}', [SanPhamController::class, 'detail'])->where('id', '[0-9]+');
 Route::get('/san-pham/xoa/{id}', [SanPhamController::class, 'delete']);
 
-Route::get('/day04', function () {
-    return view('Day04');
-});
+
 
 // Khai báo route đủ phương thức cho 1 đối tượng
-Route::resource('/customers', CustomerController::class);
+//Route::resource('/customers', CustomerController::class)->middleware('auth.basic');
+// Tạo route khai báo login
+Route::match(['GET', 'POST'], '/login',[LoginController::class, 'login'])->name('login');
+Route::get('/logout',[LoginController::class, 'logout'])->name('logout');
+
+Route::middleware([\App\Http\Middleware\CheckRole::class])->group(function () {
+    // tất cả các route muốn bảo vệ được đưa vào đy
+    Route::get('/day04', function () {
+        return view('Day04');
+    });
+//    Route::get('/customers/create', CustomerController::class, 'create');
+    Route::resource('/customers', CustomerController::class);
+});
