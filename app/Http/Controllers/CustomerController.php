@@ -51,7 +51,7 @@ class CustomerController extends Controller
 //            'date_of_birth' => ['required', 'date']
 //        ]);
         // Gặp gỗi sẽ dừng xử lý
-        // Cách 1
+        // Cácha 1
         $customer = new Customer();
         $customer -> name = $request->input('name');
         $customer -> identify_id =$request->input('identify_id');
