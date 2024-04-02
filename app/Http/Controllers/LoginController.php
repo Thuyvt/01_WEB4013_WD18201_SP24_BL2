@@ -2,8 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\UserResetPassEmail;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Mail;
 use Session;
 class LoginController extends Controller
 {
@@ -27,5 +31,28 @@ class LoginController extends Controller
     {
         Auth::logout();
         return redirect()->route('login');
+    }
+
+    public function forgotPassword(Request $request) {
+        if ($request->isMethod('POST')) {
+            $email = $request['email'];
+            $token = Hash::make($email); // tạo token từ địa chỉ email
+            Mail::to($email) -> send(new UserResetPassEmail($token));
+        } else {
+            return view('auth.forgot-password');
+        }
+    }
+
+    public function resetPassword(Request $request) {
+        $users = User::all();
+        foreach ($users as $user) {
+            var_dump(Hash::check($user->email, $request->token));
+            if (strcmp(Hash::make($user->email), $request->token)) {
+                $user->where('id', $user->id)->update([
+                   'password' => Hash::make('12345678')
+                ]);
+                break;
+            }
+         }
     }
 }

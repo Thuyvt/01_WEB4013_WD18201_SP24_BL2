@@ -43,3 +43,6 @@ Route::middleware([\App\Http\Middleware\CheckRole::class])->group(function () {
 //    Route::get('/customers/create', CustomerController::class, 'create');
     Route::resource('/customers', CustomerController::class);
 });
+
+Route::match(['GET', 'POST'], '/forgot-password', [LoginController::class, 'forgotPassword']);
+Route::get('/reset-password/{token}', [LoginController::class,'resetPassword']);

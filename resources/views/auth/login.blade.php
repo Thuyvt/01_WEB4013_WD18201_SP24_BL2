@@ -11,5 +11,6 @@
             <input type="password" name="password" class="form-control">
         </div>
         <button type="submit" class="btn btn-success"> Đăng nhập</button>
+        <a href="/forgot-password">Quên mật khẩu</a>
     </form>
 @endsection
